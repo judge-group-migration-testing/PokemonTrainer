@@ -28,8 +28,10 @@ public class CatchPokemon(ILogger<CatchPokemon> logger, ApiService apiService, T
             }
 
             _logger.LogInformation($"Wild Pokemon: {pokemon.Name} : has appeared!");
-            var test1 = _probability.CalculateCatchChance(pokemon);
-            if (test1.Result.Equals(true))
+
+            var checkIfCaught = _probability.CalculateCatchChance(pokemon);
+
+            if (checkIfCaught.Result.Equals(true))
             {
                 _tableServices.AddPokemonAsync(pokemon);
             }
