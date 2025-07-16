@@ -32,4 +32,6 @@ builder.Services.AddSingleton(provider =>
 
 builder.Services.AddSingleton<TableServices>();
 
+builder.Services.AddSingleton<Probability>();
+
 builder.Build().Run();
