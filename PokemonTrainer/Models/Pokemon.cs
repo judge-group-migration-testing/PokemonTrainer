@@ -18,4 +18,7 @@ public record Pokemon
 
     [JsonPropertyName("types")]
     public List<PokemonType>? Types { get; set; }
+
+    [JsonPropertyName("stats")]
+    public List<PokemonStats> Stats { get; set; }
 }
