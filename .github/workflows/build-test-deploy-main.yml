@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
 
     steps:
       - name: Checkout
@@ -36,10 +37,15 @@ jobs:
       - name: Publish Function App
         run: dotnet publish ${{ env.PROJECT_PATH }} --no-restore --configuration Release --output ${{ env.PUBLISH_PATH }}
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1.5.3
         with:
-          # Uses publish profile authentication via repository secret.
           app-name: ${{ secrets.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.PUBLISH_PATH }}
-          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
