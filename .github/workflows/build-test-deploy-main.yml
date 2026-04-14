@@ -36,7 +36,7 @@ jobs:
         with:
           name: release-build
           path: |
-            PokemonTrainer/**/bin/Release/**
+            **/bin/Release/**
 
   test:
     runs-on: ubuntu-latest
@@ -56,9 +56,6 @@ jobs:
         with:
           name: release-build
           path: .
-
-      - name: Restore dependencies
-        run: dotnet restore
 
       - name: Test
         run: dotnet test --no-build --configuration Release --verbosity normal
@@ -89,7 +86,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish Function App
-        run: dotnet publish ${{ env.PROJECT_PATH }} --no-build --no-restore --configuration Release --output ${{ env.PUBLISH_PATH }}
+        run: dotnet publish ${{ env.PROJECT_PATH }} --no-build --configuration Release --output ${{ env.PUBLISH_PATH }}
 
       - name: Login to Azure
         uses: azure/login@v2
