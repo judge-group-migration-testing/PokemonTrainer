@@ -37,6 +37,7 @@ jobs:
           name: release-build
           path: |
             **/bin/Release/**
+            **/obj/Release/**
 
   test:
     runs-on: ubuntu-latest
