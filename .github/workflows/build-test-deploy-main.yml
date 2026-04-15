@@ -2,7 +2,7 @@ name: Build, Test, and Deploy on Main
 
 on:
   push:
-    branches: [ "test-branch" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
